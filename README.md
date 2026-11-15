@@ -1,6 +1,6 @@
 # 咖啡萃取科學｜LLM Wiki
 
-這是獨立於「萃光咖啡筆記」的課堂作業專案，用 Karpathy 的 LLM Wiki 方法整理咖啡萃取科學，並以 Wiki 為基礎製作教學簡報。
+本專案用 Karpathy 的 LLM Wiki 方法整理咖啡萃取科學：先逐篇 ingest 六篇研究建立知識庫，再以 Wiki 為唯一知識來源製作教學 HTML 簡報。
 
 ## 專案狀態
 
