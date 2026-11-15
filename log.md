@@ -166,3 +166,11 @@
 - **新版部署：** Site project 保持 public；保存 version 2，來源 commit `dbfea18cefe9397f06ea80a5d840e4442372b6f9`，部署 ID `appgdep_6af9a7499ba08191a1befc0474244680`，Sites 回報 `succeeded`。公開網址仍為 https://coffee-extraction-science-class.erickuo0707.chatgpt.site。Wiki repo `erickuo0707/coffee-extraction-wiki` 維持 private。
 - **檢查界線：** 第 2–7 頁曾經瀏覽器檢視；第 1、8 頁及最後的水流顏色加粗調整沒有再次截圖。Build 與部署均成功，但此記錄不宣稱八頁最後狀態全數完成瀏覽器 QA；詳見 `checks/slide-visual-refresh.md`。
 
+## [2026-11-15] transition refresh | 加強簡報轉場
+
+- **使用者偏好：** 原先 280ms 的切換效果看起來偏輕，依使用者「華麗一些」的方向加強。
+- **實際修改：** 入場改為 560ms，加入 32px 上移、0.93 倍縮放、輕微旋轉與 12px 模糊，收尾有細微回彈；退場用 360ms 上移、放大與模糊淡出。
+- **Build：** Wiki OpenSlide `npm run build` 成功（`built in 1.38s`）；獨立公開 Site `npm run build -- --out-dir dist` 成功（`built in 1.57s`）。兩者均仍顯示 `node:path` browser externalization 和大型 chunk 提醒。
+- **發布：** Site source commit `73349773036becd7b82d6f2485d899b2865a123b`，saved version 3，部署 `appgdep_6af9a8c56a1c8191a06d8b6097b42ca9` 回報 `succeeded`；公開網址不變，Wiki repo 仍為 private。Site helper 封裝在 Windows 失敗，改以 `tar.exe` 包裝 build 輸出；Site 接受 30 個檔案。
+- **檢查界線：** 最終轉場設定通過 build，但沒有再次擷取瀏覽器畫面量測或確認每一頁的動態效果；其餘視覺檢查範圍見 `checks/slide-visual-refresh.md`。
+

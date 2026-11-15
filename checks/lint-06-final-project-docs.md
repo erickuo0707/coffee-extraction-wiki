@@ -12,3 +12,5 @@
 - **範圍說明：** `node_modules/` 和 OpenSlide／Apple Design 技能資料夾不屬於 Wiki 文件檢查範圍；簡報來源碼另見 `lint-05-open-slide-source.md`。Codespaces build 已成功；個別投影片逐頁瀏覽器視覺檢查尚未完成，詳見 `log.md`。
 
 - **最後更新後重跑（含本日誌行）：** 31 個 Markdown、5 個 Wiki 頁、6 個來源記錄；本地連結、來源 ID、摘要、相關頁面、索引收錄與行尾空白全部通過。
+
+- **轉場更新後最終重跑（含本記錄）：** 31 個 Markdown、5 個 Wiki 頁、6 個來源記錄；本地連結、來源 ID、摘要、相關頁面、索引收錄及行尾空白全部通過。

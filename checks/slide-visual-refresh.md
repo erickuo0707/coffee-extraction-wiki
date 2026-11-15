@@ -14,7 +14,7 @@
 - 獨立公開 Site：`npm run build -- --out-dir dist` 成功，`built in 2.22s`。
 - 本機瀏覽器預覽檢視投影片第 2 至 7 頁；檢視畫面中各頁文字與照片可見，法式濾壓照片更換為較明亮實拍後再次檢視。
 - 第 7 頁檢視時可見 Q 版咖啡豆助手、壺、濾杯與蒸氣。該次畫面檢視後才將水流改成較粗的青藍色虛線並加大水滴；此最後的樣式調整已通過兩個 build，但未再作瀏覽器截圖。
-- 轉場已設定為 280ms 淡入、微幅上移縮放及模糊淡出；沒有逐頁量測實際轉場時間。
+- 轉場目前設定為 560ms 入場（上移、縮放、輕微旋轉與模糊淡入，末段微幅回彈）及 360ms 退場（放大、上移、模糊淡出）；沒有逐頁量測實際轉場時間。
 - Build 顯示 `node:path` browser externalization 與大型 bundle 警告，仍成功產生 `dist/`。
 
 ## 公開部署
@@ -23,6 +23,13 @@
 - Sites Windows package helper 回報 `Unable to package the Site archive.`；改用 `tar.exe` 封裝 `dist/`，將靜態 hosting manifest 寫入封裝用暫存目錄，沒有把它當成新的 Wiki 內容。
 - 實際驗證 archive 有 `dist/index.html`、`dist/.openai/hosting.json`、投影片 JavaScript bundle 與九張 JPG；Sites 收件紀錄為 30 個檔案、4,229,120 bytes。
 - Sites saved version 2；部署 ID `appgdep_6af9a7499ba08191a1befc0474244680` 回報 `succeeded`。正式網址：[咖啡萃取科學教學簡報](https://coffee-extraction-science-class.erickuo0707.chatgpt.site)。Site 保持 public；Wiki repository 保持 private。
+
+## 轉場加強與新版發布
+
+- 依使用者偏好，將入場轉場從 280ms 調整為 560ms，退場為 360ms，增添上移、縮放回彈、輕微旋轉與模糊效果。
+- 重跑 Wiki build（1.38s）及公開 Site build（1.57s），皆成功。使用者可在瀏覽器直接體驗；本次沒有再次擷取每頁轉場畫面。
+- Windows Sites package helper 再次回報 `Unable to package the Site archive.`；以 `tar.exe` 封裝新版 build，驗證入口、manifest、咖啡簡報 bundle 及手沖照片檔案都在包內。
+- Site source commit `73349773036becd7b82d6f2485d899b2865a123b`，saved version 3；部署 ID `appgdep_6af9a8c56a1c8191a06d8b6097b42ca9` 回報 `succeeded`。Site 保持 public，Wiki repo 保持 private。
 
 ## 圖片來源
 

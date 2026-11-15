@@ -11,19 +11,26 @@ import methodPress from './assets/method-frenchpress.jpg';
 import methodEspresso from './assets/method-espresso.jpg';
 import temperatureSetup from './assets/cover-pourover.jpg';
 
-const EASE_OUT = 'cubic-bezier(0, 0, 0.2, 1)';
-const EASE_IN = 'cubic-bezier(0.4, 0, 1, 1)';
-const HOLD: Keyframe[] = [{ opacity: 1 }, { opacity: 1 }];
+const EASE_OUT = 'cubic-bezier(0.16, 1, 0.3, 1)';
+const EASE_IN = 'cubic-bezier(0.7, 0, 0.84, 0)';
 
 export const transition: SlideTransition = {
-  duration: 280,
-  exit: { duration: 280, easing: EASE_IN, keyframes: HOLD },
+  duration: 560,
+  exit: {
+    duration: 360,
+    easing: EASE_IN,
+    keyframes: [
+      { opacity: 1, transform: 'translateY(0) scale(1)', filter: 'blur(0)' },
+      { opacity: 0, transform: 'translateY(-18px) scale(1.045)', filter: 'blur(8px)' },
+    ],
+  },
   enter: {
-    duration: 280,
+    duration: 560,
     easing: EASE_OUT,
     keyframes: [
-      { opacity: 0, transform: 'translateY(10px) scale(0.985)', filter: 'blur(4px)' },
-      { opacity: 1, transform: 'translateY(0) scale(1)', filter: 'blur(0)' },
+      { opacity: 0, transform: 'translateY(32px) scale(0.93) rotate(-1deg)', filter: 'blur(12px)' },
+      { opacity: 1, transform: 'translateY(-3px) scale(1.012) rotate(0.15deg)', filter: 'blur(0)' },
+      { opacity: 1, transform: 'translateY(0) scale(1) rotate(0)', filter: 'blur(0)' },
     ],
   },
 };
