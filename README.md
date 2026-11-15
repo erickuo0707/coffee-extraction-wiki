@@ -2,9 +2,19 @@
 
 本專案用 Karpathy 的 LLM Wiki 方法整理咖啡萃取科學：先逐篇 ingest 六篇研究建立知識庫，再以 Wiki 為唯一知識來源製作教學 HTML 簡報。
 
+## ▶ 教學簡報（12 頁）
+
+| | |
+|---|---|
+| **線上觀看** | [咖啡萃取的科學](https://claude.ai/artifact/CYZs65Fon3WiSuUiqztvZj) |
+| **離線版** | [`教學簡報.html`](教學簡報.html)：下載後雙擊，用瀏覽器開啟（GitHub 頁面不會直接播放 HTML） |
+| **操作** | ← / → 換頁 · F 全螢幕 · N 講稿 |
+| **原始碼** | [`slides/coffee-extraction-science/`](slides/coffee-extraction-science/) |
+
+
 ## 專案狀態
 
-已逐篇 ingest 六篇學術來源，建立五個互相連結的 Wiki 知識頁，完成一輪 Query、比例方向修正及獨立專案重查。OpenSlide 投影片已在 GitHub Codespaces 建置並預覽，之後依「重點化」修訂由 8 頁改為 12 頁（見 `checks/slide-focus-revision.md`）；另以只含咖啡投影片的獨立靜態版本發布於 [教學簡報](https://coffee-extraction-science-class.erickuo0707.chatgpt.site)。公開網站只含簡報成品，LLM Wiki repository 仍為私人。逐頁視覺檢查尚未完成，限制見 `log.md` 與 `checks/submission-checklist.md`。
+已逐篇 ingest 六篇學術來源，建立五個互相連結的 Wiki 知識頁，完成一輪 Query、比例方向修正及獨立專案重查。OpenSlide 投影片已在 GitHub Codespaces 建置並預覽，之後依「重點化」修訂由 8 頁改為 12 頁（見 `checks/slide-focus-revision.md`）。最新版簡報見上方連結；舊的 8 頁版曾發布於 ChatGPT Sites。逐頁視覺檢查尚未完成，限制見 `log.md` 與 `checks/submission-checklist.md`。
 
 ## 目錄
 
@@ -26,4 +36,4 @@
 
 ## 簡報預覽
 
-已發布的免登入簡報連結：[coffee-extraction-science-class.erickuo0707.chatgpt.site](https://coffee-extraction-science-class.erickuo0707.chatgpt.site)。建置與預覽結果及逐頁檢查限制記錄於 `log.md`、`slides/README.md` 和 `checks/submission-checklist.md`。
+最新 12 頁版見本頁上方「教學簡報」。舊的 8 頁版：[coffee-extraction-science-class.erickuo0707.chatgpt.site](https://coffee-extraction-science-class.erickuo0707.chatgpt.site)。建置與預覽結果及逐頁檢查限制記錄於 `log.md`、`slides/README.md` 和 `checks/submission-checklist.md`。
