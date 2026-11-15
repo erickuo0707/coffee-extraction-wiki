@@ -140,6 +140,15 @@
 - **發布狀態：** Codespaces port preview 是暫時連結，並受 Codespaces 訪問權限限制。`dist/` 尚未加入 GitHub repository；尚未建立任何一般訪客可用的公開部署連結。
 - **本機清理：** 遞迴移除既有 `node_modules/` 的操作遭安全審核以 `blocked by policy` 拒絕，沒有檔案被刪除；如需空間，須由使用者在檔案總管自行移除。
 
+## [2026-11-15] publish | 獨立公開咖啡簡報
+
+- **使用者選擇：** 只公開 HTML 簡報，維持 Wiki repository 私人。為符合此範圍，公開 Site 的原始投影片目錄只複製 `coffee-extraction-science`，沒有包含範例 `getting-started` 投影片或 Wiki 的 `raw/`、`wiki/`、`checks/`。
+- **獨立建置：** 在同層資料夾 `../coffee-extraction-presentation-site/` 建置，重用原專案既有 `node_modules/` junction，沒有重新安裝套件。執行 `npm run build -- --out-dir dist`，OpenSlide v2.3.2 成功，`dist/` 只有咖啡簡報 bundle 及 runtime assets；耗時 3.45 秒。建置有 `node:path` browser externalization 和 `index` chunk 大於 500 kB 的提醒，build 未失敗。
+- **封裝：** Sites 的 `package-site.mjs` 未能在 Windows 完成；該封裝器呼叫的 Node 複製程序退出碼為 `-1073740791`，工具只輸出 `Unable to package the Site archive.`。改用 Windows `tar.exe` 將相同 `dist/` 與 `.openai/hosting.json` 封裝；列出 24 個 archive 項目，確認包含 `dist/index.html` 與 `dist/.openai/hosting.json`。Sites 收到並接受該 archive（21 個檔案）。
+- **Site 與部署：** 建立獨立 Sites project `coffee-extraction-science-class`，source commit `3e282840e20857928f4c3550a0ad12c210f70330`，saved version 1；依使用者授權將該 Site 設為 `public`。deployment `appgdep_6af99f4af738819199d28448e99e32e1` 回報 `succeeded`，正式網址為 https://coffee-extraction-science-class.erickuo0707.chatgpt.site。既有 `erickuo0707/coffee-extraction-wiki` 私人 repo 未改變可見度。
+- **檢查限制：** 個別頁面逐頁瀏覽器檢查仍未完成；不把部署成功等同動畫及所有頁面視覺 QA 通過。分享方式、實際命令及檢查結果已寫入 `slides/README.md`、`checks/reflection.md` 與 `checks/submission-checklist.md`。
+- **發布文件最後重查：** 更新正式網址後重跑相同文件 lint；30 個 Markdown、5 個 Wiki 頁、6 個來源記錄。相對連結、來源 ID、摘要、索引收錄及行尾空白全部通過。
+
 ## [2026-11-15] lint | 更新簡報紀錄與反思後重查
 
 - **範圍：** 根目錄與 `raw/`、`wiki/`、`checks/`、`slides/` 第一層 Markdown；5 個 Wiki 頁、6 個來源記錄。

@@ -4,7 +4,7 @@
 
 ## 專案狀態
 
-已逐篇 ingest 六篇學術來源，建立五個互相連結的 Wiki 知識頁，完成一輪 Query、比例方向修正及獨立專案重查。8 頁 OpenSlide 投影片已在 GitHub Codespaces 完成建置，產生 `dist/index.html` 與資源檔；預覽清單顯示咖啡簡報封面。逐頁視覺檢查與正式公開部署尚未完成。來源專案已上傳至私人 GitHub repository。
+已逐篇 ingest 六篇學術來源，建立五個互相連結的 Wiki 知識頁，完成一輪 Query、比例方向修正及獨立專案重查。8 頁 OpenSlide 投影片已在 GitHub Codespaces 建置並預覽；另以只含咖啡投影片的獨立靜態版本發布於 [教學簡報](https://coffee-extraction-science-class.erickuo0707.chatgpt.site)。公開網站只含簡報成品，LLM Wiki repository 仍為私人。逐頁視覺檢查尚未完成，限制見 `log.md` 與 `checks/submission-checklist.md`。
 
 ## 目錄
 
@@ -26,4 +26,4 @@
 
 ## 簡報預覽
 
-建置與預覽結果記錄於 `log.md` 及 `slides/README.md`。Codespaces 預覽連結只在工作區仍執行、且訪客有權限時可用；公開、長期連結尚待決定發布方式。個別投影片逐頁檢查仍待完成。
+已發布的免登入簡報連結：[coffee-extraction-science-class.erickuo0707.chatgpt.site](https://coffee-extraction-science-class.erickuo0707.chatgpt.site)。建置與預覽結果及逐頁檢查限制記錄於 `log.md`、`slides/README.md` 和 `checks/submission-checklist.md`。
