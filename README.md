@@ -4,7 +4,7 @@
 
 ## 專案狀態
 
-已逐篇 ingest 六篇學術來源，建立五個互相連結的 Wiki 知識頁，完成一輪 Query、比例方向修正及獨立專案重查。8 頁 OpenSlide 投影片已在 GitHub Codespaces 建置並預覽；另以只含咖啡投影片的獨立靜態版本發布於 [教學簡報](https://coffee-extraction-science-class.erickuo0707.chatgpt.site)。公開網站只含簡報成品，LLM Wiki repository 仍為私人。逐頁視覺檢查尚未完成，限制見 `log.md` 與 `checks/submission-checklist.md`。
+已逐篇 ingest 六篇學術來源，建立五個互相連結的 Wiki 知識頁，完成一輪 Query、比例方向修正及獨立專案重查。OpenSlide 投影片已在 GitHub Codespaces 建置並預覽，之後依「重點化」修訂由 8 頁改為 12 頁（見 `checks/slide-focus-revision.md`）；另以只含咖啡投影片的獨立靜態版本發布於 [教學簡報](https://coffee-extraction-science-class.erickuo0707.chatgpt.site)。公開網站只含簡報成品，LLM Wiki repository 仍為私人。逐頁視覺檢查尚未完成，限制見 `log.md` 與 `checks/submission-checklist.md`。
 
 ## 目錄
 

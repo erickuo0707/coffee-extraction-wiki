@@ -23,3 +23,4 @@
 - [最終 Wiki 文件重查](checks/lint-04-final-wiki.md)
 - [六項提交清單](checks/submission-checklist.md)
 - [簡報照片、動畫與發布檢查](checks/slide-visual-refresh.md)
+- [簡報重點化修訂紀錄](checks/slide-focus-revision.md)
