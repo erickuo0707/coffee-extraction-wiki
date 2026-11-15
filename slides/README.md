@@ -2,7 +2,7 @@
 
 使用者指定以 [OpenSlide](https://github.com/open-slide/open-slide) 製作投影片，並匯出可瀏覽的 HTML。簡報內容依本專案五個 Wiki 知識頁與來源 ID 編排。OpenSlide scaffold 已建立於 `coffee-extraction-science/`，內含框架的五個 Agent Skills；另加入 [Apple Design skill](https://github.com/emilkowalski/skills/tree/main/skills/apple-design) 及其 MIT 授權資訊。
 
-使用者選定 8 頁、輕量文字與分步揭示；投影片來源碼位於 `coffee-extraction-science/slides/coffee-extraction-science/index.tsx`，引用 S01–S06，並附研究方法範圍。已在 GitHub Codespaces 執行 `npm ci` 及 `npm run build`；OpenSlide v2.3.2 build 成功，產生 `dist/index.html` 與資源檔。`npm run preview -- --host 0.0.0.0` 啟動預覽，連接埠 4173 已轉送；預覽清單列出「咖啡萃取的科學」及封面。
+初版為 8 頁、輕量文字與分步揭示，後依重點化修訂改為 12 頁（見 `../checks/slide-focus-revision.md`）；投影片來源碼位於 `coffee-extraction-science/slides/coffee-extraction-science/index.tsx`，引用 S01–S06，並附研究方法範圍。已在 GitHub Codespaces 執行 `npm ci` 及 `npm run build`；OpenSlide v2.3.2 build 成功，產生 `dist/index.html` 與資源檔。`npm run preview -- --host 0.0.0.0` 啟動預覽，連接埠 4173 已轉送；預覽清單列出「咖啡萃取的科學」及封面。
 
 依使用者選擇，另建立只含咖啡投影片的獨立靜態建置並公開發布，沒有把 Wiki、來源紀錄或原始專案 repo 放入公開站台。正式網址：[https://coffee-extraction-science-class.erickuo0707.chatgpt.site](https://coffee-extraction-science-class.erickuo0707.chatgpt.site)。公開站台部署成功；個別投影片逐頁導覽與分步揭示尚未完成瀏覽器視覺檢查，因此不宣稱完整的逐頁 QA。
 

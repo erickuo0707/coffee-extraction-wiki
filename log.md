@@ -174,3 +174,11 @@
 - **發布：** Site source commit `73349773036becd7b82d6f2485d899b2865a123b`，saved version 3，部署 `appgdep_6af9a8c56a1c8191a06d8b6097b42ca9` 回報 `succeeded`；公開網址不變，Wiki repo 仍為 private。Site helper 封裝在 Windows 失敗，改以 `tar.exe` 包裝 build 輸出；Site 接受 30 個檔案。
 - **檢查界線：** 最終轉場設定通過 build，但沒有再次擷取瀏覽器畫面量測或確認每一頁的動態效果；其餘視覺檢查範圍見 `checks/slide-visual-refresh.md`。
 
+
+## [2026-11-15] slide revision | 簡報重點化（8 頁 → 12 頁）
+
+- **觸發：** 使用者回饋簡報沒有重點。檢查發現各頁以限制說明收尾、缺學習目標與回顧、TDS／EY 差異未說清、投影片未標對應 Wiki 頁。
+- **Wiki 修改：** 查讀 S03 開放全文，確認萃取率定義（溶解固體質量 ÷ 乾咖啡粉質量，Eq. 13），補入 `wiki/粉水比-濃度-萃取率.md`。
+- **簡報修改：** 以三個重點為主線，新增學習目標、浸泡實驗、回顧與「簡報 ↔ Wiki」附錄頁；標題改結論句、每頁加重點列、限制改為適用範圍標籤、頁尾標 Wiki 頁與來源；加入講稿 `notes`。
+- **檢查：** `npm run build` 成功；Playwright 逐頁截圖發現第 5 頁標籤裁切、第 6 頁步驟拆格溢出，修正後重跑 build 與截圖，12 頁通過版面檢查。細節見 `checks/slide-focus-revision.md`。
+- **未完成：** 尚未重新部署公開站台；播放模式分步動畫未另行檢查。
