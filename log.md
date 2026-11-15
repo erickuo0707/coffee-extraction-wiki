@@ -162,5 +162,7 @@
 - **實際修改：** 封面與萃取、研磨、量測及方法比較頁加入照片；統一採 280ms 淡入、微幅上移縮放及輕模糊轉場；第 7 頁加入原生 SVG Q 版咖啡豆助手、壺嘴、水流、水滴與蒸氣動畫，並遵守 `prefers-reduced-motion`。為了讓水流更醒目，最後將水流與水滴改為青藍色並加粗。
 - **本機 build：** 在 `slides/coffee-extraction-science` 實際執行 `npm run build`，OpenSlide v2.3.2 成功，`built in 1.81s`。另在獨立公開 Site 工作區執行 `npm run build -- --out-dir dist`，成功，`built in 2.22s`。兩次均有 `node:path` browser externalization 及大於 500 kB chunk 提醒，但沒有 build 失敗。
 - **瀏覽器檢視：** 使用本機預覽檢視第 2 至 7 頁；照片與文字版面均可見，法式濾壓照片後來改為較明亮的 Clay Banks 實拍。檢視時第 7 頁可見 Q 版咖啡豆、手沖器具與蒸氣；之後才加強水流顏色與粗細，此最後一項改動有 build 驗證，沒有再擷取第二張瀏覽器畫面。逐頁轉場時間仍未做定量檢查。
-- **公開狀態：** 此次改版完成前 Site 為 public；Wiki repo 維持 private。網站的新版部署結果將在完成後補記。
+- **公開封裝：** Site helper 完成 source commit/push 後，其 Windows archive 封裝步驟失敗，錯誤為 `Unable to package the Site archive.`。在 repo 外建立暫存包，以 `tar.exe` 封裝 build 後的 `dist/` 並寫入 `dist/.openai/hosting.json`；實際驗證 archive 含首頁、HTML bundle、九張照片與 hosting manifest。Sites 接受 30 個檔案，回報儲存大小 4,229,120 bytes。
+- **新版部署：** Site project 保持 public；保存 version 2，來源 commit `dbfea18cefe9397f06ea80a5d840e4442372b6f9`，部署 ID `appgdep_6af9a7499ba08191a1befc0474244680`，Sites 回報 `succeeded`。公開網址仍為 https://coffee-extraction-science-class.erickuo0707.chatgpt.site。Wiki repo `erickuo0707/coffee-extraction-wiki` 維持 private。
+- **檢查界線：** 第 2–7 頁曾經瀏覽器檢視；第 1、8 頁及最後的水流顏色加粗調整沒有再次截圖。Build 與部署均成功，但此記錄不宣稱八頁最後狀態全數完成瀏覽器 QA；詳見 `checks/slide-visual-refresh.md`。
 

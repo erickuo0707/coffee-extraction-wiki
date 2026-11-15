@@ -22,3 +22,4 @@
 - [獨立專案 Wiki 重跑結果](checks/lint-03-standalone-wiki.md)
 - [最終 Wiki 文件重查](checks/lint-04-final-wiki.md)
 - [六項提交清單](checks/submission-checklist.md)
+- [簡報照片、動畫與發布檢查](checks/slide-visual-refresh.md)

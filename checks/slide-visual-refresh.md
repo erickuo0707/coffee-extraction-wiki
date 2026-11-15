@@ -17,6 +17,13 @@
 - 轉場已設定為 280ms 淡入、微幅上移縮放及模糊淡出；沒有逐頁量測實際轉場時間。
 - Build 顯示 `node:path` browser externalization 與大型 bundle 警告，仍成功產生 `dist/`。
 
+## 公開部署
+
+- Site source commit：`dbfea18cefe9397f06ea80a5d840e4442372b6f9`。
+- Sites Windows package helper 回報 `Unable to package the Site archive.`；改用 `tar.exe` 封裝 `dist/`，將靜態 hosting manifest 寫入封裝用暫存目錄，沒有把它當成新的 Wiki 內容。
+- 實際驗證 archive 有 `dist/index.html`、`dist/.openai/hosting.json`、投影片 JavaScript bundle 與九張 JPG；Sites 收件紀錄為 30 個檔案、4,229,120 bytes。
+- Sites saved version 2；部署 ID `appgdep_6af9a7499ba08191a1befc0474244680` 回報 `succeeded`。正式網址：[咖啡萃取科學教學簡報](https://coffee-extraction-science-class.erickuo0707.chatgpt.site)。Site 保持 public；Wiki repository 保持 private。
+
 ## 圖片來源
 
 - Jakub Kapusnak — [手沖壺注水](https://unsplash.com/photos/person-holding-gray-stainless-steel-kettle-Rt2t11IUizs)
