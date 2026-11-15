@@ -130,3 +130,18 @@
 
 - **實際重跑：** 將新增的 `lint-06-final-project-docs.md` 及更新後的日誌一併納入，再跑相同的連結、Wiki 引用、摘要、相關頁面、索引與行尾空白檢查。
 - **結果：** 29 個專案文件 Markdown、5 個 Wiki 頁、6 個來源記錄；全部通過，沒有 Wiki 內容修改。
+
+## [2026-11-15] slide build | Codespaces 建置及預覽
+
+- **環境：** 在 GitHub Codespaces 的 `/workspaces/coffee-extraction-wiki/slides/coffee-extraction-science` 執行；未在本機安裝套件。
+- **實際命令：** `npm ci && npm run build`。OpenSlide build 成功，終端顯示 `built in 2.78s`；`dist/` 中有 `index.html` 和 hashed assets。Build 另顯示 `index` chunk 大於 500 kB 的效能提醒，沒有因此失敗。
+- **預覽：** 執行 `npm run preview -- --host 0.0.0.0`；OpenSlide v2.3.2 回報 port 4173 ready，Codespaces 自動轉送該連接埠。預覽首頁載入，列出「咖啡萃取的科學」投影片並顯示封面文案「一杯咖啡，如何被萃取？」。
+- **檢查界線：** 個別投影片的逐頁導覽和分步揭示未驗證；嘗試打開單頁時，電腦操作工作階段逾時，沒有收到單頁結果。因此不將此記為完整視覺 QA 通過。
+- **發布狀態：** Codespaces port preview 是暫時連結，並受 Codespaces 訪問權限限制。`dist/` 尚未加入 GitHub repository；尚未建立任何一般訪客可用的公開部署連結。
+- **本機清理：** 遞迴移除既有 `node_modules/` 的操作遭安全審核以 `blocked by policy` 拒絕，沒有檔案被刪除；如需空間，須由使用者在檔案總管自行移除。
+
+## [2026-11-15] lint | 更新簡報紀錄與反思後重查
+
+- **範圍：** 根目錄與 `raw/`、`wiki/`、`checks/`、`slides/` 第一層 Markdown；5 個 Wiki 頁、6 個來源記錄。
+- **實際結果：** 共 30 個 Markdown 文件；相對連結、來源 ID、摘要、Wiki 索引收錄與行尾空白全部通過。見 `checks/lint-06-final-project-docs.md`。
+- **內容處理：** 沒有修改 Wiki 知識頁或來源內容；更新簡報建置狀態並新增以實際執行結果撰寫的 `checks/reflection.md`。
