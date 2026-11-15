@@ -154,3 +154,13 @@
 - **範圍：** 根目錄與 `raw/`、`wiki/`、`checks/`、`slides/` 第一層 Markdown；5 個 Wiki 頁、6 個來源記錄。
 - **實際結果：** 共 30 個 Markdown 文件；相對連結、來源 ID、摘要、Wiki 索引收錄與行尾空白全部通過。見 `checks/lint-06-final-project-docs.md`。
 - **內容處理：** 沒有修改 Wiki 知識頁或來源內容；更新簡報建置狀態並新增以實際執行結果撰寫的 `checks/reflection.md`。
+
+## [2026-11-15] slide refresh | 真實咖啡照片、Q 版沖煮動畫與轉場
+
+- **使用者方向：** 教學主線採手沖；浸泡式（French press）用於方法比較，義式僅作萃取參照。使用者要求照片須為網路實拍，不使用假 AI 圖片，並加入可愛沖煮動畫。
+- **實際素材：** 投影片新增九張實拍咖啡照片，分別由 Unsplash 的 Jakub Kapusnak、William Figueroa、Ryan Spaulding、Clay Banks、syahmi syahir、Scott K、Matthias Oberholzer 拍攝，及 Wikimedia Commons 的 Romwriter 拍攝的粗細研磨照片。每張投影片照片均顯示作者與原始頁面連結；Commons 兩張圖片標註 CC BY-SA 3.0。未將 AI 生成圖放入專案。
+- **實際修改：** 封面與萃取、研磨、量測及方法比較頁加入照片；統一採 280ms 淡入、微幅上移縮放及輕模糊轉場；第 7 頁加入原生 SVG Q 版咖啡豆助手、壺嘴、水流、水滴與蒸氣動畫，並遵守 `prefers-reduced-motion`。為了讓水流更醒目，最後將水流與水滴改為青藍色並加粗。
+- **本機 build：** 在 `slides/coffee-extraction-science` 實際執行 `npm run build`，OpenSlide v2.3.2 成功，`built in 1.81s`。另在獨立公開 Site 工作區執行 `npm run build -- --out-dir dist`，成功，`built in 2.22s`。兩次均有 `node:path` browser externalization 及大於 500 kB chunk 提醒，但沒有 build 失敗。
+- **瀏覽器檢視：** 使用本機預覽檢視第 2 至 7 頁；照片與文字版面均可見，法式濾壓照片後來改為較明亮的 Clay Banks 實拍。檢視時第 7 頁可見 Q 版咖啡豆、手沖器具與蒸氣；之後才加強水流顏色與粗細，此最後一項改動有 build 驗證，沒有再擷取第二張瀏覽器畫面。逐頁轉場時間仍未做定量檢查。
+- **公開狀態：** 此次改版完成前 Site 為 public；Wiki repo 維持 private。網站的新版部署結果將在完成後補記。
+

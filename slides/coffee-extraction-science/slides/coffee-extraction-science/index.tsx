@@ -1,6 +1,32 @@
 import { Step, Steps } from '@open-slide/core';
-import type { DesignSystem, Page, SlideMeta } from '@open-slide/core';
-import type { ReactNode } from 'react';
+import type { DesignSystem, Page, SlideMeta, SlideTransition } from '@open-slide/core';
+import type { CSSProperties, ReactNode } from 'react';
+import coverPour from './assets/temperature-kettle.jpg';
+import extractionBloom from './assets/extraction-pourover.jpg';
+import groundsCoarse from './assets/grounds-coarse.jpg';
+import groundsFine from './assets/grounds-fine.jpg';
+import brewScale from './assets/brew-scale.jpg';
+import methodPour from './assets/method-pourover.jpg';
+import methodPress from './assets/method-frenchpress.jpg';
+import methodEspresso from './assets/method-espresso.jpg';
+import temperatureSetup from './assets/cover-pourover.jpg';
+
+const EASE_OUT = 'cubic-bezier(0, 0, 0.2, 1)';
+const EASE_IN = 'cubic-bezier(0.4, 0, 1, 1)';
+const HOLD: Keyframe[] = [{ opacity: 1 }, { opacity: 1 }];
+
+export const transition: SlideTransition = {
+  duration: 280,
+  exit: { duration: 280, easing: EASE_IN, keyframes: HOLD },
+  enter: {
+    duration: 280,
+    easing: EASE_OUT,
+    keyframes: [
+      { opacity: 0, transform: 'translateY(10px) scale(0.985)', filter: 'blur(4px)' },
+      { opacity: 1, transform: 'translateY(0) scale(1)', filter: 'blur(0)' },
+    ],
+  },
+};
 
 export const design: DesignSystem = {
   palette: { bg: '#F4EFE7', text: '#2B211B', accent: '#A65E3E' },
@@ -81,8 +107,9 @@ const StepLine = ({ number, label, text }: { number: string; label: string; text
   </div>
 );
 
-const MethodPanel = ({ name, accent, first, second }: { name: string; accent: string; first: string; second: string }) => (
-  <div style={{ background: C.card, border: `1px solid ${C.line}`, borderRadius: 22, padding: 26, minHeight: 390, boxSizing: 'border-box' }}>
+const MethodPanel = ({ name, accent, first, second, photo, credit, href }: { name: string; accent: string; first: string; second: string; photo: string; credit: string; href: string }) => (
+  <div style={{ background: C.card, border: `1px solid ${C.line}`, borderRadius: 22, padding: 18, minHeight: 440, boxSizing: 'border-box' }}>
+    <Photo src={photo} alt={`${name}沖煮實拍`} credit={credit} href={href} style={{ height: 170, marginBottom: 18 }} />
     <div style={{ display: 'flex', alignItems: 'center', gap: 12, marginBottom: 20 }}>
       <span style={{ width: 10, height: 34, borderRadius: 9, background: accent }} />
       <strong style={{ fontSize: 31 }}>{name}</strong>
@@ -112,6 +139,15 @@ const ReferenceCard = ({ id, title, detail, links }: { id: string; title: string
 );
 
 const linkStyle = { color: C.coffee, textDecoration: 'underline', textUnderlineOffset: 4 } as const;
+
+const Photo = ({ src, alt, credit, href, style }: { src: string; alt: string; credit: string; href: string; style?: CSSProperties }) => (
+  <figure style={{ margin: 0, position: 'relative', overflow: 'hidden', borderRadius: 22, background: '#3B2B23', ...style }}>
+    <img src={src} alt={alt} style={{ display: 'block', width: '100%', height: '100%', objectFit: 'cover' }} />
+    <figcaption style={{ position: 'absolute', inset: 'auto 0 0', padding: '30px 14px 11px', background: 'linear-gradient(transparent, rgba(26, 20, 16, 0.78))', color: C.white, fontSize: 17, lineHeight: 1.25 }}>
+      <a href={href} target="_blank" rel="noreferrer" style={{ color: C.white, textDecoration: 'none' }}>{credit}</a>
+    </figcaption>
+  </figure>
+);
 
 const Cover: Page = () => (
   <div
@@ -145,34 +181,27 @@ const Cover: Page = () => (
         初學者導讀　·　滴濾與浸泡為主，義式濃縮作比較
       </div>
     </div>
-    <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
-      <svg viewBox="0 0 520 520" width="440" height="440" role="img" aria-label="咖啡液滴與萃取漣漪圖示">
-        <circle cx="260" cy="260" r="224" fill={C.card} stroke={C.line} strokeWidth="2" />
-        <circle cx="260" cy="260" r="170" fill="none" stroke={C.caramel} strokeWidth="3" opacity="0.7" />
-        <circle cx="260" cy="260" r="118" fill="none" stroke={C.coffee} strokeWidth="4" opacity="0.75" />
-        <circle cx="260" cy="260" r="66" fill={C.coffee} />
-        <path d="M260 176 C230 218 215 238 215 263 A45 45 0 0 0 305 263 C305 238 290 218 260 176Z" fill={C.white} opacity="0.96" />
-        <path d="M180 337 C218 366 302 366 340 337" fill="none" stroke={C.sage} strokeWidth="8" strokeLinecap="round" />
-        <circle cx="135" cy="167" r="10" fill={C.caramel} />
-        <circle cx="374" cy="178" r="7" fill={C.sage} />
-        <circle cx="376" cy="349" r="11" fill={C.caramel} />
-      </svg>
-    </div>
+    <Photo src={coverPour} alt="咖啡師以細口壺向濾杯注水" credit="Photo by Jakub Kapusnak · Unsplash" href="https://unsplash.com/photos/person-holding-gray-stainless-steel-kettle-Rt2t11IUizs" style={{ height: 650 }} />
   </div>
 );
 
 const ExtractionProcess: Page = () => (
   <Frame page="02" section="萃取系統" title="萃取不是單一旋鈕" source="依據 S01 綜述">
-    <p style={{ margin: '0 0 20px', color: C.muted, fontSize: 31, lineHeight: 1.4 }}>
-      沖煮時，水接觸咖啡粉，粉中的部分物質進入飲品。
-    </p>
-    <Steps>
-      <Step><StepLine number="01" label="接觸" text="研磨與粉床，決定水如何遇到咖啡。" /></Step>
-      <Step><StepLine number="02" label="溶出" text="水溫、時間與流動，共同改變萃取過程。" /></Step>
-      <Step><StepLine number="03" label="成杯" text="多種物質進入杯中，形成濃度與感官結果。" /></Step>
-    </Steps>
-    <div style={{ marginTop: 24, padding: '18px 24px', borderRadius: 18, background: '#E9DFD1', color: C.ink, fontSize: 27 }}>
-      先問沖煮方法，再解讀任何數字或風味描述。
+    <div style={{ display: 'grid', gridTemplateColumns: '1.05fr 0.95fr', gap: 44, alignItems: 'center' }}>
+      <div>
+        <p style={{ margin: '0 0 18px', color: C.muted, fontSize: 30, lineHeight: 1.4 }}>
+          沖煮時，水接觸咖啡粉，粉中的部分物質進入飲品。
+        </p>
+        <Steps>
+          <Step><StepLine number="01" label="接觸" text="研磨與粉床，決定水如何遇到咖啡。" /></Step>
+          <Step><StepLine number="02" label="溶出" text="水溫、時間與流動，共同改變萃取過程。" /></Step>
+          <Step><StepLine number="03" label="成杯" text="多種物質進入飲品，形成濃度與感官結果。" /></Step>
+        </Steps>
+        <div style={{ marginTop: 20, padding: '16px 22px', borderRadius: 18, background: '#E9DFD1', color: C.ink, fontSize: 26 }}>
+          先問沖煮方法，再解讀數字或風味描述。
+        </div>
+      </div>
+      <Photo src={extractionBloom} alt="濾杯內咖啡粉浸潤、起泡的特寫" credit="Photo by William Figueroa · Unsplash" href="https://unsplash.com/photos/coffee-is-brewing-in-a-pour-over-coffee-maker-PIRNODAC1WA" style={{ height: 510 }} />
     </div>
   </Frame>
 );
@@ -180,9 +209,9 @@ const ExtractionProcess: Page = () => (
 const GrindFlow: Page = () => (
   <Frame page="03" section="研磨與流動" title="磨細，不代表萃取一定升高" source="S02 義式濃縮模型與實驗；S06 義式萃取動態">
     <div style={{ display: 'grid', gridTemplateColumns: '1.2fr 0.8fr', gap: 56, alignItems: 'center' }}>
-      <div style={{ background: C.card, border: `1px solid ${C.line}`, borderRadius: 24, padding: 26 }}>
+      <div style={{ background: C.card, border: `1px solid ${C.line}`, borderRadius: 24, padding: 22 }}>
         <div style={{ color: C.muted, fontSize: 22, letterSpacing: 1.4 }}>S02 特定義式濃縮設定中的觀察趨勢</div>
-        <svg viewBox="0 0 900 360" width="100%" height="330" role="img" aria-label="特定義式濃縮研究中間研磨設定萃取率較高的概念圖">
+        <svg viewBox="0 0 900 360" width="100%" height="250" role="img" aria-label="特定義式濃縮研究中間研磨設定萃取率較高的概念圖">
           <path d="M90 35 V290 H850" fill="none" stroke={C.line} strokeWidth="3" />
           <path d="M118 245 C240 238 275 190 365 150 C470 102 520 92 610 136 C705 182 756 232 830 249" fill="none" stroke={C.coffee} strokeWidth="10" strokeLinecap="round" />
           <circle cx="118" cy="245" r="10" fill={C.caramel} />
@@ -193,6 +222,10 @@ const GrindFlow: Page = () => (
           <text x="783" y="330" fill={C.muted} fontSize="25">較細</text>
           <text x="90" y="25" fill={C.muted} fontSize="22">觀察到的萃取率方向（無數值刻度）</text>
         </svg>
+        <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 14 }}>
+          <Photo src={groundsCoarse} alt="Wikimedia Commons 實拍的粗研磨濕咖啡粉" credit="Romwriter · CC BY-SA 3.0 · 粗" href="https://commons.wikimedia.org/wiki/File:Coffee_grounds_coarse.jpg" style={{ height: 132 }} />
+          <Photo src={groundsFine} alt="Wikimedia Commons 實拍的細研磨濕咖啡粉" credit="Romwriter · CC BY-SA 3.0 · 細" href="https://commons.wikimedia.org/wiki/File:Coffee_grounds_fine.jpg" style={{ height: 132 }} />
+        </div>
       </div>
       <div>
         <Steps>
@@ -207,25 +240,30 @@ const GrindFlow: Page = () => (
 
 const Measurements: Page = () => (
   <Frame page="04" section="量測指標" title="三個數字，回答三種問題" source="S03 浸泡研究；S04 滴濾感官；S06 義式研究">
-    <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: 20, marginTop: 18 }}>
-      <div style={{ background: C.card, borderRadius: 22, border: `1px solid ${C.line}`, padding: 25 }}>
-        <div style={{ color: C.coffee, fontSize: 22, letterSpacing: 2 }}>01　比例</div>
-        <div style={{ margin: '18px 0 10px', fontSize: 41, fontWeight: 720 }}>水 ÷ 粉</div>
-        <Steps><Step><p style={{ margin: 0, color: C.muted, fontSize: 29, lineHeight: 1.35 }}>每份乾咖啡粉用了多少水？寫清分子與分母。</p></Step></Steps>
+    <div style={{ display: 'grid', gridTemplateColumns: '1.7fr 0.8fr', gap: 32, alignItems: 'stretch', marginTop: 18 }}>
+      <div>
+        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: 16 }}>
+          <div style={{ background: C.card, borderRadius: 22, border: `1px solid ${C.line}`, padding: 22 }}>
+            <div style={{ color: C.coffee, fontSize: 22, letterSpacing: 2 }}>01　比例</div>
+            <div style={{ margin: '14px 0 8px', fontSize: 38, fontWeight: 720 }}>水 ÷ 粉</div>
+            <Steps><Step><p style={{ margin: 0, color: C.muted, fontSize: 27, lineHeight: 1.35 }}>每份乾粉用了多少水？寫清分子與分母。</p></Step></Steps>
+          </div>
+          <div style={{ background: C.card, borderRadius: 22, border: `1px solid ${C.line}`, padding: 22 }}>
+            <div style={{ color: C.coffee, fontSize: 22, letterSpacing: 2 }}>02　濃度</div>
+            <div style={{ margin: '14px 0 8px', fontSize: 38, fontWeight: 720 }}>TDS</div>
+            <Steps><Step><p style={{ margin: 0, color: C.muted, fontSize: 27, lineHeight: 1.35 }}>這杯飲品有多濃？描述溶解固體。</p></Step></Steps>
+          </div>
+          <div style={{ background: C.card, borderRadius: 22, border: `1px solid ${C.line}`, padding: 22 }}>
+            <div style={{ color: C.coffee, fontSize: 22, letterSpacing: 2 }}>03　萃取率</div>
+            <div style={{ margin: '14px 0 8px', fontSize: 38, fontWeight: 720 }}>EY</div>
+            <Steps><Step><p style={{ margin: 0, color: C.muted, fontSize: 27, lineHeight: 1.35 }}>乾粉中約有多少可溶物進入飲品？</p></Step></Steps>
+          </div>
+        </div>
+        <div style={{ marginTop: 20, padding: '17px 22px', background: '#E9DFD1', borderRadius: 18, fontSize: 26, lineHeight: 1.4 }}>
+          TDS 和 EY 相關，卻不是同一個量；數字也不能單獨決定好不好喝。
+        </div>
       </div>
-      <div style={{ background: C.card, borderRadius: 22, border: `1px solid ${C.line}`, padding: 25 }}>
-        <div style={{ color: C.coffee, fontSize: 22, letterSpacing: 2 }}>02　濃度</div>
-        <div style={{ margin: '18px 0 10px', fontSize: 41, fontWeight: 720 }}>TDS</div>
-        <Steps><Step><p style={{ margin: 0, color: C.muted, fontSize: 29, lineHeight: 1.35 }}>這杯飲品有多濃？描述液體中的溶解固體。</p></Step></Steps>
-      </div>
-      <div style={{ background: C.card, borderRadius: 22, border: `1px solid ${C.line}`, padding: 25 }}>
-        <div style={{ color: C.coffee, fontSize: 22, letterSpacing: 2 }}>03　萃取率</div>
-        <div style={{ margin: '18px 0 10px', fontSize: 41, fontWeight: 720 }}>EY</div>
-        <Steps><Step><p style={{ margin: 0, color: C.muted, fontSize: 29, lineHeight: 1.35 }}>乾粉中約有多少可溶物進入了飲品？</p></Step></Steps>
-      </div>
-    </div>
-    <div style={{ marginTop: 34, padding: '19px 24px', background: '#E9DFD1', borderRadius: 18, fontSize: 28, lineHeight: 1.4 }}>
-      TDS 和 EY 相關，卻不是同一個量；數字也不能單獨決定好不好喝。
+      <Photo src={brewScale} alt="手沖咖啡與電子秤，顯示沖煮時的重量量測" credit="Photo by Ryan Spaulding · Unsplash" href="https://unsplash.com/photos/pour-over-coffee-brewing-on-a-digital-scale-lqb6W5RHgyU" style={{ height: 430 }} />
     </div>
   </Frame>
 );
@@ -238,18 +276,27 @@ const MethodComparison: Page = () => (
         accent={C.caramel}
         first="接近平衡時，增加水／粉比會降低 TDS。"
         second="測試範圍內 EY 約 21%，相對穩定。"
+        photo={methodPress}
+        credit="Photo by Clay Banks · Unsplash"
+        href="https://unsplash.com/photos/woman-pouring-coffee-from-french-press-into-cup-KCKksYf6-Y0"
       />
       <MethodPanel
         name="滴濾"
         accent={C.sage}
         first="TDS、萃取百分比與烘焙程度，會一起影響感官描述。"
         second="單一咖啡與品評組的結果，不是普遍喜好規則。"
+        photo={methodPour}
+        credit="Photo by syahmi syahir · Unsplash"
+        href="https://unsplash.com/photos/barista-making-pour-over-coffee-with-a-gooseneck-kettle-AQTgvFfwOcg"
       />
       <MethodPanel
         name="義式濃縮"
         accent={C.coffee}
         first="流速、研磨與水溫在特定實驗中互相影響。"
         second="研究量測成分，不代表哪個設定最好喝。"
+        photo={methodEspresso}
+        credit="Photo by Scott K · Unsplash"
+        href="https://unsplash.com/photos/fresh-espresso-pouring-from-a-coffee-machine-portafilter-O9AtwHvKkko"
       />
     </div>
     <p style={{ margin: '22px 0 0', color: C.muted, fontSize: 24 }}>
@@ -260,27 +307,28 @@ const MethodComparison: Page = () => (
 
 const WaterTemperature: Page = () => (
   <Frame page="06" section="水溫與實驗設計" title="水溫，要連同研究設計一起看" source="S05 滴濾感官研究與 2021 作者更正">
-    <div style={{ display: 'grid', gridTemplateColumns: '0.8fr 1.2fr', gap: 64, alignItems: 'center' }}>
-      <div style={{ padding: 34, background: C.card, borderRadius: 24, border: `1px solid ${C.line}`, textAlign: 'center' }}>
-        <div style={{ color: C.muted, fontSize: 23, letterSpacing: 1 }}>滴濾測試溫度</div>
-        <div style={{ margin: '30px 0', display: 'flex', justifyContent: 'center', alignItems: 'center', gap: 20 }}>
-          <span style={{ fontSize: 36, fontWeight: 700, color: C.coffee }}>87°</span>
-          <span style={{ color: C.caramel, fontSize: 28 }}>→</span>
-          <span style={{ fontSize: 36, fontWeight: 700, color: C.coffee }}>90°</span>
-          <span style={{ color: C.caramel, fontSize: 28 }}>→</span>
-          <span style={{ fontSize: 36, fontWeight: 700, color: C.coffee }}>93°C</span>
-        </div>
-        <div style={{ height: 10, borderRadius: 99, background: `linear-gradient(90deg, ${C.caramel}, ${C.coffee})` }} />
-      </div>
+    <div style={{ display: 'grid', gridTemplateColumns: '1fr 0.85fr', gap: 44, alignItems: 'center' }}>
       <div>
+        <div style={{ marginBottom: 20, padding: 28, background: C.card, borderRadius: 24, border: `1px solid ${C.line}`, textAlign: 'center' }}>
+          <div style={{ color: C.muted, fontSize: 23, letterSpacing: 1 }}>滴濾測試溫度</div>
+          <div style={{ margin: '24px 0', display: 'flex', justifyContent: 'center', alignItems: 'center', gap: 20 }}>
+            <span style={{ fontSize: 36, fontWeight: 700, color: C.coffee }}>87°</span>
+            <span style={{ color: C.caramel, fontSize: 28 }}>→</span>
+            <span style={{ fontSize: 36, fontWeight: 700, color: C.coffee }}>90°</span>
+            <span style={{ color: C.caramel, fontSize: 28 }}>→</span>
+            <span style={{ fontSize: 36, fontWeight: 700, color: C.coffee }}>93°C</span>
+          </div>
+          <div style={{ height: 10, borderRadius: 99, background: `linear-gradient(90deg, ${C.caramel}, ${C.coffee})` }} />
+        </div>
         <Steps>
           <Step><StepLine number="01" label="控制結果" text="研究調整研磨與時間，讓 TDS／萃取率達到目標。" /></Step>
           <Step><StepLine number="02" label="比較感官" text="在這個設計下，溫度沒有顯著的獨立感官影響。" /></Step>
           <Step><StepLine number="03" label="保留範圍" text="只適用該滴濾測試與 87–93°C，不表示溫度永遠不重要。" /></Step>
         </Steps>
       </div>
+      <Photo src={temperatureSetup} alt="滴濾器與分享壺放在電子秤上的手沖配置" credit="Photo by Matthias Oberholzer · Unsplash" href="https://unsplash.com/photos/coffee-is-brewing-in-a-pour-over-setup-SpiXdOg0VP0" style={{ height: 465 }} />
     </div>
-    <div style={{ marginTop: 22, color: C.muted, fontSize: 23 }}>
+    <div style={{ marginTop: 16, color: C.muted, fontSize: 22 }}>
       S05 的作者更正修正配水方法單位；更正沒有推翻感官結果。
     </div>
   </Frame>
@@ -288,25 +336,54 @@ const WaterTemperature: Page = () => (
 
 const BrewLoop: Page = () => (
   <Frame page="07" section="實作方法" title="把下一杯，變成可比較的試驗" source="操作流程綜合 Wiki；感官依據 S04">
-    <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: 22, marginTop: 42 }}>
-      <div style={{ minHeight: 350, padding: 28, background: C.card, border: `1px solid ${C.line}`, borderRadius: 22 }}>
-        <div style={{ color: C.caramel, fontSize: 24, letterSpacing: 1 }}>先建立基準</div>
-        <div style={{ margin: '22px 0', fontSize: 37, fontWeight: 700 }}>記下沖煮條件</div>
-        <Steps><Step><div style={{ color: C.muted, fontSize: 29, lineHeight: 1.45 }}>方法、粉量、水量、溫度、時間；比例標清方向。</div></Step></Steps>
+    <div style={{ display: 'grid', gridTemplateColumns: '1.4fr 0.8fr', gap: 46, alignItems: 'center', marginTop: 18 }}>
+      <div>
+        <Steps>
+          <Step><StepLine number="01" label="記下條件" text="方法、粉量、水量、溫度、時間；比例標清方向。" /></Step>
+          <Step><StepLine number="02" label="觀察風味" text="記錄香氣、酸甜、苦味、厚薄與餘韻，不先貼標籤。" /></Step>
+          <Step><StepLine number="03" label="只改一項" text="比較前後差異，保留意外結果，再重複確認。" /></Step>
+        </Steps>
+        <div style={{ marginTop: 20, color: C.coffee, fontSize: 27, fontWeight: 650 }}>
+          TDS 或 EY 是量測線索，不是個人喜好分數。
+        </div>
       </div>
-      <div style={{ minHeight: 350, padding: 28, background: C.card, border: `1px solid ${C.line}`, borderRadius: 22 }}>
-        <div style={{ color: C.caramel, fontSize: 24, letterSpacing: 1 }}>先觀察，再解釋</div>
-        <div style={{ margin: '22px 0', fontSize: 37, fontWeight: 700 }}>寫下感官描述</div>
-        <Steps><Step><div style={{ color: C.muted, fontSize: 29, lineHeight: 1.45 }}>記錄香氣、酸甜、苦味、厚薄與餘韻，不先貼標籤。</div></Step></Steps>
+      <div style={{ minHeight: 430, borderRadius: 28, background: '#E9DFD1', display: 'flex', alignItems: 'center', justifyContent: 'center', position: 'relative', overflow: 'hidden' }}>
+        <svg viewBox="0 0 420 420" width="390" height="390" role="img" aria-label="Q版咖啡豆小助手示範向濾杯注水的循環動畫">
+          <style>{`
+            @keyframes brew-drop-fall { 0% { transform: translateY(0); opacity: 1; } 68% { opacity: 1; } 100% { transform: translateY(118px); opacity: 0; } }
+            @keyframes brew-stream-flow { to { stroke-dashoffset: -38px; } }
+            @keyframes brew-steam-rise { 0%, 100% { opacity: .25; transform: translateY(0); } 50% { opacity: .85; transform: translateY(-8px); } }
+            .brew-drop { animation: brew-drop-fall 1.5s ease-in infinite; }
+            .brew-drop-late { animation-delay: .75s; }
+            .brew-stream { animation: brew-stream-flow .8s linear infinite; }
+            .brew-steam { animation: brew-steam-rise 2.3s ease-in-out infinite; }
+            @media (prefers-reduced-motion: reduce) { .brew-drop, .brew-stream, .brew-steam { animation: none; } }
+          `}</style>
+          <ellipse cx="210" cy="367" rx="146" ry="24" fill="#C7AB8F" opacity="0.45" />
+          <path d="M296 89 C306 76 341 76 355 90 C369 104 366 126 351 137 L304 137 C285 129 282 104 296 89Z" fill="#D5B897" stroke="#6F5848" strokeWidth="6" strokeLinejoin="round" />
+          <path d="M335 86 C337 73 348 69 357 75 L364 89" fill="none" stroke="#6F5848" strokeWidth="7" strokeLinecap="round" />
+          <path d="M346 99 C374 89 384 109 376 130 C371 143 360 145 349 136" fill="none" stroke="#6F5848" strokeWidth="7" strokeLinecap="round" />
+          <path d="M300 111 C282 121 267 143 253 160 L241 175" fill="none" stroke="#6F5848" strokeWidth="9" strokeLinecap="round" strokeLinejoin="round" />
+          <path d="M130 304 L290 304 L263 350 L158 350Z" fill="#FFFDF9" stroke="#6F5848" strokeWidth="6" strokeLinejoin="round" />
+          <path d="M154 322 Q210 335 266 322 L255 344 L167 344Z" fill="#A65E3E" />
+          <path d="M176 350 L244 350 L252 379 L168 379Z" fill="#FFFFFF" stroke="#6F5848" strokeWidth="6" strokeLinejoin="round" />
+          <path d="M186 365 Q210 372 235 365" fill="none" stroke="#A65E3E" strokeWidth="5" strokeLinecap="round" />
+          <path className="brew-stream" d="M241 179 C237 222 219 264 213 314" fill="none" stroke="#278A96" strokeWidth="9" strokeLinecap="round" strokeDasharray="10 9" />
+          <ellipse className="brew-drop" cx="241" cy="179" rx="10" ry="14" fill="#278A96" />
+          <ellipse className="brew-drop brew-drop-late" cx="241" cy="179" rx="10" ry="14" fill="#278A96" />
+          <path className="brew-steam" d="M180 279 C163 263 195 253 180 236 M214 279 C197 263 229 253 214 236 M248 279 C231 263 263 253 248 236" fill="none" stroke="#C5935B" strokeWidth="6" strokeLinecap="round" />
+          <ellipse cx="102" cy="233" rx="62" ry="80" fill="#A65E3E" stroke="#6F5848" strokeWidth="6" transform="rotate(-12 102 233)" />
+          <path d="M104 158 C82 192 79 268 107 307" fill="none" stroke="#C5935B" strokeWidth="7" strokeLinecap="round" opacity="0.8" />
+          <circle cx="81" cy="226" r="6" fill="#2B211B" />
+          <circle cx="119" cy="218" r="6" fill="#2B211B" />
+          <path d="M89 247 Q103 262 119 243" fill="none" stroke="#2B211B" strokeWidth="5" strokeLinecap="round" />
+          <circle cx="67" cy="240" r="8" fill="#E8A28C" opacity="0.8" />
+          <circle cx="132" cy="233" r="8" fill="#E8A28C" opacity="0.8" />
+          <path d="M51 282 Q21 302 40 320 M146 275 Q171 289 160 307" fill="none" stroke="#6F5848" strokeWidth="8" strokeLinecap="round" />
+          <path d="M66 309 L59 330 M125 307 L134 329" fill="none" stroke="#6F5848" strokeWidth="8" strokeLinecap="round" />
+        </svg>
+        <div style={{ position: 'absolute', bottom: 16, right: 20, color: C.muted, fontSize: 18 }}>逐滴沖煮 · Q版動畫</div>
       </div>
-      <div style={{ minHeight: 350, padding: 28, background: C.card, border: `1px solid ${C.line}`, borderRadius: 22 }}>
-        <div style={{ color: C.caramel, fontSize: 24, letterSpacing: 1 }}>下一杯只改一項</div>
-        <div style={{ margin: '22px 0', fontSize: 37, fontWeight: 700 }}>比較前後差異</div>
-        <Steps><Step><div style={{ color: C.muted, fontSize: 29, lineHeight: 1.45 }}>保留意外結果；重複幾次，再判斷是否對自己有用。</div></Step></Steps>
-      </div>
-    </div>
-    <div style={{ marginTop: 30, color: C.coffee, fontSize: 28, fontWeight: 650 }}>
-      TDS 或 EY 是量測線索，不是個人喜好分數。
     </div>
   </Frame>
 );
