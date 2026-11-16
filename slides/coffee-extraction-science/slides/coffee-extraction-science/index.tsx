@@ -3,11 +3,10 @@ import type { DesignSystem, Page, SlideMeta, SlideTransition } from '@open-slide
 import type { CSSProperties, ReactNode } from 'react';
 import coverPour from './assets/temperature-kettle.jpg';
 import extractionBloom from './assets/extraction-pourover.jpg';
-import groundsCoarse from './assets/grounds-coarse.jpg';
-import groundsFine from './assets/grounds-fine.jpg';
 import methodPour from './assets/method-pourover.jpg';
 import methodPress from './assets/method-frenchpress.jpg';
 import methodEspresso from './assets/method-espresso.jpg';
+import brewScale from './assets/brew-scale.jpg';
 import temperatureSetup from './assets/cover-pourover.jpg';
 
 const EASE_OUT = 'cubic-bezier(0.16, 1, 0.3, 1)';
@@ -117,10 +116,10 @@ const Takeaway = ({ children }: { children: ReactNode }) => (
 );
 
 const StepLine = ({ number, label, text }: { number: string; label: string; text: string }) => (
-  <div style={{ display: 'grid', gridTemplateColumns: '76px 230px 1fr', alignItems: 'center', gap: 24, padding: '22px 0', borderBottom: `1px solid ${C.line}` }}>
+  <div style={{ display: 'grid', gridTemplateColumns: '64px 150px 1fr', alignItems: 'center', gap: 22, padding: '22px 0', borderBottom: `1px solid ${C.line}` }}>
     <span style={{ color: C.caramel, fontSize: 26, fontWeight: 700 }}>{number}</span>
     <strong style={{ fontSize: 36, lineHeight: 1.2 }}>{label}</strong>
-    <span style={{ color: C.muted, fontSize: 31, lineHeight: 1.35 }}>{text}</span>
+    <span style={{ color: C.muted, fontSize: 30, lineHeight: 1.4, textWrap: 'pretty' } as CSSProperties}>{text}</span>
   </div>
 );
 
@@ -156,17 +155,17 @@ const Cover: Page = () => (
       width: '100%',
       height: '100%',
       boxSizing: 'border-box',
-      padding: '120px 136px',
+      padding: '0 0 0 136px',
       background: 'var(--osd-bg)',
       color: 'var(--osd-text)',
       fontFamily: 'var(--osd-font-body)',
       display: 'grid',
-      gridTemplateColumns: '1.3fr 0.7fr',
+      gridTemplateColumns: '1.1fr 0.9fr',
       alignItems: 'center',
-      gap: 80,
+      gap: 72,
     }}
   >
-    <div>
+    <div style={{ padding: '120px 0' }}>
       <div style={{ display: 'flex', alignItems: 'center', gap: 14, color: C.coffee, fontSize: 24, letterSpacing: 3, fontWeight: 700 }}>
         <span style={{ width: 13, height: 13, borderRadius: 999, background: C.coffee }} />
         咖啡萃取科學 · 初學者導讀
@@ -179,10 +178,10 @@ const Cover: Page = () => (
         看懂兩個數字、三個旋鈕，<br />學會用「一次改一項」調整下一杯。
       </p>
       <div style={{ marginTop: 54, color: C.muted, fontSize: 24, letterSpacing: 1 }}>
-        以手沖與浸泡為主例 · 義式濃縮作對照 · 依據 6 篇研究整理成的 LLM Wiki
+        以手沖與浸泡為主例 · 義式濃縮作對照<br />依據 6 篇研究整理成的 LLM Wiki
       </div>
     </div>
-    <Photo src={coverPour} alt="咖啡師以細口壺向濾杯注水" credit="Photo by Jakub Kapusnak · Unsplash" href="https://unsplash.com/photos/person-holding-gray-stainless-steel-kettle-Rt2t11IUizs" style={{ height: 650 }} />
+    <Photo src={coverPour} alt="咖啡師以細口壺向濾杯注水" credit="Photo by Jakub Kapusnak · Unsplash" href="https://unsplash.com/photos/person-holding-gray-stainless-steel-kettle-Rt2t11IUizs" style={{ height: '100%', borderRadius: 0 }} />
   </div>
 );
 
@@ -211,11 +210,12 @@ const WhatIsExtraction: Page = () => (
           <Step><StepLine number="03" label="成杯" text="溶出的物質形成濃度、香氣與滋味。" /></Step>
         </Steps>
         <p style={{ margin: '28px 0 0', color: C.muted, fontSize: 28, lineHeight: 1.45 }}>
-          不同物質溶出的速度不一樣，所以每個條件都會影響最後喝到的味道。
+          不同物質溶出的速度不一樣，所以每個條件都會影響最後的味道。
         </p>
       </div>
-      <Photo src={extractionBloom} alt="濾杯內咖啡粉浸潤、起泡的特寫" credit="Photo by William Figueroa · Unsplash" href="https://unsplash.com/photos/coffee-is-brewing-in-a-pour-over-coffee-maker-PIRNODAC1WA" style={{ height: 540 }} />
+      <Photo src={extractionBloom} alt="濾杯內咖啡粉浸潤、起泡的特寫" credit="Photo by William Figueroa · Unsplash" href="https://unsplash.com/photos/coffee-is-brewing-in-a-pour-over-coffee-maker-PIRNODAC1WA" style={{ height: 520 }} />
     </div>
+    <Takeaway>你能調的每個條件，都是在改變「水怎麼遇到粉」和「溶出多少」。</Takeaway>
   </Frame>
 );
 
@@ -236,7 +236,7 @@ const Formula = ({ tag, name, top, bottom, question, highlight }: { tag: string;
 const ThreeNumbers: Page = () => (
   <Frame page="04" section="重點 1　濃淡 ≠ 萃取" title="TDS 和萃取率，差在「分母」" wiki="粉水比、濃度與萃取率" source="S03（萃取率定義 Eq. 13）">
     <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: 24 }}>
-      <Formula tag="配方" name="粉水比" top="水" bottom="咖啡粉" question="用了多少水？寫 1:16 時要標清哪邊是粉。" />
+      <Formula tag="配方" name="粉水比" top="水" bottom="咖啡粉" question="寫 1:16 時，要標清哪邊是粉。" />
       <Steps>
         <Step>
           <Formula tag="杯子" name="濃度 TDS" top="溶解固體" bottom="整杯飲品" question="這杯咖啡有多濃？" highlight />
@@ -266,17 +266,39 @@ const ImmersionChart = () => (
 
 const Immersion: Page = () => (
   <Frame page="05" section="重點 1　濃淡 ≠ 萃取" title="浸泡時多加水：咖啡變淡，萃取率卻幾乎不變" scope="浸泡式、接近平衡｜S03" wiki="粉水比、濃度與萃取率" source="S03">
-    <div style={{ display: 'grid', gridTemplateColumns: '1.25fr 0.75fr', gap: 48, alignItems: 'center' }}>
+    <div style={{ display: 'grid', gridTemplateColumns: '1.3fr 0.7fr', gap: 44, alignItems: 'stretch' }}>
       <div style={{ background: C.card, border: `1px solid ${C.line}`, borderRadius: 24, padding: '20px 26px' }}>
         <ImmersionChart />
       </div>
-      <Photo src={methodPress} alt="法式濾壓壺倒出咖啡" credit="Photo by Clay Banks · Unsplash" href="https://unsplash.com/photos/woman-pouring-coffee-from-french-press-into-cup-KCKksYf6-Y0" style={{ height: 470 }} />
+      <div style={{ display: 'flex', flexDirection: 'column', justifyContent: 'center', gap: 26 }}>
+        <Steps>
+          <Step><div style={{ fontSize: 30, lineHeight: 1.45 }}><strong>實驗怎麼做</strong><br /><span style={{ color: C.muted }}>粉和水泡到接近平衡，改變水粉比後量 TDS 和萃取率。</span></div></Step>
+          <Step><div style={{ fontSize: 30, lineHeight: 1.45 }}><strong>看到什麼</strong><br /><span style={{ color: C.muted }}>水越多 TDS 越低，萃取率幾乎停在 21%。</span></div></Step>
+        </Steps>
+      </div>
     </div>
     <Takeaway>覺得太濃或太淡？先調粉水比——它主要改變的是「濃淡」。</Takeaway>
   </Frame>
 );
 
 /* ---------- 06 重點 2：研磨 ---------- */
+// 粗／細研磨示意：同一面積內畫不同大小的顆粒（純示意，不代表實際粒徑分布）
+const GrindSketch = ({ label, note, size }: { label: string; note: string; size: number }) => {
+  const W = 400, H = 120, gap = size * 2.5;
+  const dots: ReactNode[] = [];
+  for (let y = size + 8; y <= H - size - 4; y += gap) {
+    for (let x = size + 8; x <= W - size - 4; x += gap) {
+      dots.push(<circle key={`${x}-${y}`} cx={x} cy={y} r={size} fill={C.coffee} opacity={0.85} />);
+    }
+  }
+  return (
+    <div style={{ background: '#F1E4D6', border: `1px solid ${C.line}`, borderRadius: 16, padding: '12px 16px 14px' }}>
+      <svg viewBox={`0 0 ${W} ${H}`} width="100%" height="96" role="img" aria-label={`${label}示意圖`}>{dots}</svg>
+      <div style={{ marginTop: 6, fontSize: 24, fontWeight: 700 }}>{label}</div>
+      <div style={{ color: C.muted, fontSize: 20, lineHeight: 1.3 }}>{note}</div>
+    </div>
+  );
+};
 const Grind: Page = () => (
   <Frame page="06" section="重點 2　旋鈕會互相牽動" title="磨細，不一定萃得更多" scope="義式濃縮｜S02、S06" wiki="研磨與流動" source="S01、S02、S06">
     <div style={{ display: 'grid', gridTemplateColumns: '1.2fr 0.8fr', gap: 52, alignItems: 'center' }}>
@@ -291,8 +313,8 @@ const Grind: Page = () => (
           <text x="100" y="26" fill={C.muted} fontSize="24">萃取率（概念示意，無數值刻度）</text>
         </svg>
         <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 14, marginTop: 8 }}>
-          <Photo src={groundsCoarse} alt="粗研磨濕咖啡粉" credit="Romwriter · CC BY-SA 3.0 · 粗" href="https://commons.wikimedia.org/wiki/File:Coffee_grounds_coarse.jpg" style={{ height: 125 }} />
-          <Photo src={groundsFine} alt="細研磨濕咖啡粉" credit="Romwriter · CC BY-SA 3.0 · 細" href="https://commons.wikimedia.org/wiki/File:Coffee_grounds_fine.jpg" style={{ height: 125 }} />
+          <GrindSketch label="粗研磨" note="顆粒大、縫隙多：水流快，接觸面積小" size={14} />
+          <GrindSketch label="細研磨" note="顆粒小、粉床密：接觸面積大，水流慢且易不均" size={4.5} />
         </div>
       </div>
       <div>
@@ -363,16 +385,16 @@ const BrewLoop: Page = () => (
   <Frame page="09" section="重點 3　一次只改一項" title="把下一杯，變成一次小實驗" wiki="感官與調整方法、粉水比、研磨與流動" source="S03、S04">
     <div style={{ display: 'grid', gridTemplateColumns: '1.4fr 0.75fr', gap: 46, alignItems: 'center' }}>
       <div>
-        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: 14, marginBottom: 30 }}>
+        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: 14, marginBottom: 24 }}>
           {[
             ['記錄', '豆子、方法、粉量、水量、溫度、時間'],
             ['描述', '酸、甜、苦、厚薄、餘韻（先寫觀察）'],
-            ['只改一項', '比較前後，意外結果也留著'],
+            ['只改一項', '比較前後；意外也要記下來'],
           ].map(([t, d], i) => (
             <div key={t} style={{ background: C.card, border: `1px solid ${C.line}`, borderRadius: 20, padding: '20px 22px' }}>
               <div style={{ color: C.caramel, fontSize: 24, fontWeight: 700 }}>0{i + 1}</div>
               <div style={{ fontSize: 34, fontWeight: 720, margin: '6px 0 8px' }}>{t}</div>
-              <div style={{ color: C.muted, fontSize: 25, lineHeight: 1.4 }}>{d}</div>
+              <div style={{ color: C.muted, fontSize: 24, lineHeight: 1.4, textWrap: 'pretty' } as CSSProperties}>{d}</div>
             </div>
           ))}
         </div>
@@ -382,58 +404,20 @@ const BrewLoop: Page = () => (
           <Step><Decision when="結果跟預期相反" then="先記下來，再檢查方法與水流" /></Step>
         </Steps>
       </div>
-      <div style={{ height: 520, borderRadius: 28, background: '#E9DFD1', display: 'flex', alignItems: 'center', justifyContent: 'center', position: 'relative', overflow: 'hidden' }}>
-        <BrewAnimation />
-        <div style={{ position: 'absolute', bottom: 16, right: 20, color: C.muted, fontSize: 18 }}>逐滴沖煮 · Q版動畫</div>
-      </div>
+      <Photo src={brewScale} alt="手沖咖啡與電子秤，顯示沖煮時的重量量測" credit="Photo by Ryan Spaulding · Unsplash" href="https://unsplash.com/photos/pour-over-coffee-brewing-on-a-digital-scale-lqb6W5RHgyU" style={{ height: 500 }} />
     </div>
+    <Takeaway>數字是線索，不是分數：記錄是為了下一杯能比較。</Takeaway>
   </Frame>
 );
 
-const BrewAnimation = () => (
-  <svg viewBox="0 0 420 420" width="420" height="420" role="img" aria-label="Q版咖啡豆小助手示範向濾杯注水的循環動畫">
-          <style>{`
-            @keyframes brew-drop-fall { 0% { transform: translateY(0); opacity: 1; } 68% { opacity: 1; } 100% { transform: translateY(118px); opacity: 0; } }
-            @keyframes brew-stream-flow { to { stroke-dashoffset: -38px; } }
-            @keyframes brew-steam-rise { 0%, 100% { opacity: .25; transform: translateY(0); } 50% { opacity: .85; transform: translateY(-8px); } }
-            .brew-drop { animation: brew-drop-fall 1.5s ease-in infinite; }
-            .brew-drop-late { animation-delay: .75s; }
-            .brew-stream { animation: brew-stream-flow .8s linear infinite; }
-            .brew-steam { animation: brew-steam-rise 2.3s ease-in-out infinite; }
-            @media (prefers-reduced-motion: reduce) { .brew-drop, .brew-stream, .brew-steam { animation: none; } }
-          `}</style>
-          <ellipse cx="210" cy="367" rx="146" ry="24" fill="#C7AB8F" opacity="0.45" />
-          <path d="M296 89 C306 76 341 76 355 90 C369 104 366 126 351 137 L304 137 C285 129 282 104 296 89Z" fill="#D5B897" stroke="#6F5848" strokeWidth="6" strokeLinejoin="round" />
-          <path d="M335 86 C337 73 348 69 357 75 L364 89" fill="none" stroke="#6F5848" strokeWidth="7" strokeLinecap="round" />
-          <path d="M346 99 C374 89 384 109 376 130 C371 143 360 145 349 136" fill="none" stroke="#6F5848" strokeWidth="7" strokeLinecap="round" />
-          <path d="M300 111 C282 121 267 143 253 160 L241 175" fill="none" stroke="#6F5848" strokeWidth="9" strokeLinecap="round" strokeLinejoin="round" />
-          <path d="M130 304 L290 304 L263 350 L158 350Z" fill="#FFFDF9" stroke="#6F5848" strokeWidth="6" strokeLinejoin="round" />
-          <path d="M154 322 Q210 335 266 322 L255 344 L167 344Z" fill="#A65E3E" />
-          <path d="M176 350 L244 350 L252 379 L168 379Z" fill="#FFFFFF" stroke="#6F5848" strokeWidth="6" strokeLinejoin="round" />
-          <path d="M186 365 Q210 372 235 365" fill="none" stroke="#A65E3E" strokeWidth="5" strokeLinecap="round" />
-          <path className="brew-stream" d="M241 179 C237 222 219 264 213 314" fill="none" stroke="#278A96" strokeWidth="9" strokeLinecap="round" strokeDasharray="10 9" />
-          <ellipse className="brew-drop" cx="241" cy="179" rx="10" ry="14" fill="#278A96" />
-          <ellipse className="brew-drop brew-drop-late" cx="241" cy="179" rx="10" ry="14" fill="#278A96" />
-          <path className="brew-steam" d="M180 279 C163 263 195 253 180 236 M214 279 C197 263 229 253 214 236 M248 279 C231 263 263 253 248 236" fill="none" stroke="#C5935B" strokeWidth="6" strokeLinecap="round" />
-          <ellipse cx="102" cy="233" rx="62" ry="80" fill="#A65E3E" stroke="#6F5848" strokeWidth="6" transform="rotate(-12 102 233)" />
-          <path d="M104 158 C82 192 79 268 107 307" fill="none" stroke="#C5935B" strokeWidth="7" strokeLinecap="round" opacity="0.8" />
-          <circle cx="81" cy="226" r="6" fill="#2B211B" />
-          <circle cx="119" cy="218" r="6" fill="#2B211B" />
-          <path d="M89 247 Q103 262 119 243" fill="none" stroke="#2B211B" strokeWidth="5" strokeLinecap="round" />
-          <circle cx="67" cy="240" r="8" fill="#E8A28C" opacity="0.8" />
-          <circle cx="132" cy="233" r="8" fill="#E8A28C" opacity="0.8" />
-          <path d="M51 282 Q21 302 40 320 M146 275 Q171 289 160 307" fill="none" stroke="#6F5848" strokeWidth="8" strokeLinecap="round" />
-          <path d="M66 309 L59 330 M125 307 L134 329" fill="none" stroke="#6F5848" strokeWidth="8" strokeLinecap="round" />
-        </svg>
-);
 
 const ReferenceCard = ({ id, title, detail, links }: { id: string; title: string; detail: string; links: ReactNode }) => (
-  <div style={{ display: 'grid', gridTemplateColumns: '60px 1fr', gap: 14, padding: '14px 0', borderBottom: `1px solid ${C.line}` }}>
+  <div style={{ display: 'grid', gridTemplateColumns: '64px 1fr', gap: 14, padding: '24px 0', borderBottom: `1px solid ${C.line}` }}>
     <span style={{ alignSelf: 'start', color: C.coffee, fontWeight: 700, fontSize: 22 }}>{id}</span>
     <div>
-      <div style={{ fontSize: 23, fontWeight: 680, lineHeight: 1.25 }}>{title}</div>
-      <div style={{ marginTop: 5, color: C.muted, fontSize: 21, lineHeight: 1.3 }}>{detail}</div>
-      <div style={{ marginTop: 5, fontSize: 20 }}>{links}</div>
+      <div style={{ fontSize: 26, fontWeight: 680, lineHeight: 1.25 }}>{title}</div>
+      <div style={{ marginTop: 8, color: C.muted, fontSize: 23, lineHeight: 1.3 }}>{detail}</div>
+      <div style={{ marginTop: 8, fontSize: 22 }}>{links}</div>
     </div>
   </div>
 );
@@ -467,7 +451,7 @@ const Sources: Page = () => (
         <ReferenceCard id="S06" title="Influence of Flow Rate, Particle Size, and Temperature…" detail="Schmieder et al. · Foods (2023)" links={<><a style={linkStyle} href="https://doi.org/10.3390/foods12152871" target="_blank" rel="noreferrer">DOI</a>　·　<a style={linkStyle} href="https://pmc.ncbi.nlm.nih.gov/articles/PMC10418593/" target="_blank" rel="noreferrer">PMC 全文</a></>} />
       </div>
     </div>
-    <div style={{ marginTop: 18, padding: '13px 18px', background: '#E9DFD1', borderRadius: 15, color: C.muted, fontSize: 20, lineHeight: 1.35 }}>
+    <div style={{ marginTop: 34, padding: '18px 24px', background: '#E9DFD1', borderRadius: 15, color: C.muted, fontSize: 24, lineHeight: 1.35 }}>
       S03、S06 已查讀開放全文；S01、S02、S04、S05 依摘要與出版頁查核，結論均限定在可查核範圍。
     </div>
   </Frame>
