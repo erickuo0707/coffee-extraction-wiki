@@ -215,7 +215,7 @@ const WhatIsExtraction: Page = () => (
       </div>
       <Photo src={extractionBloom} alt="濾杯內咖啡粉浸潤、起泡的特寫" credit="Photo by William Figueroa · Unsplash" href="https://unsplash.com/photos/coffee-is-brewing-in-a-pour-over-coffee-maker-PIRNODAC1WA" style={{ height: 520 }} />
     </div>
-    <Takeaway>你能調的每個條件，都是在改變「水怎麼遇到粉」和「溶出多少」。</Takeaway>
+    <Takeaway>研磨決定「怎麼接觸」，水溫和時間決定「溶出多少」，結果就是杯子裡的濃度和味道。</Takeaway>
   </Frame>
 );
 
@@ -248,6 +248,15 @@ const ThreeNumbers: Page = () => (
         </Step>
       </Steps>
     </div>
+    <Steps>
+      <Step>
+        <div style={{ marginTop: 22, display: 'flex', alignItems: 'center', gap: 22, padding: '16px 26px', border: `2px dashed ${C.caramel}`, borderRadius: 18, fontSize: 28, lineHeight: 1.35 }}>
+          <span style={{ color: C.coffee, fontWeight: 700, whiteSpace: 'nowrap' }}>算算看</span>
+          <span>15 g 粉，沖出 250 g 咖啡，TDS 1.3% → 溶解固體 250 × 1.3% ≈ 3.3 g → 萃取率 3.3 ÷ 15 ≈ <strong>22%</strong></span>
+          <span style={{ marginLeft: 'auto', color: C.muted, fontSize: 20, whiteSpace: 'nowrap' }}>示範計算，非研究數據</span>
+        </div>
+      </Step>
+    </Steps>
     <Takeaway>同一份溶解固體：除以「杯子」是濃度，除以「粉」是萃取率。</Takeaway>
   </Frame>
 );
@@ -331,7 +340,7 @@ const Grind: Page = () => (
 
 /* ---------- 07 重點 2：水溫 ---------- */
 const Temperature: Page = () => (
-  <Frame page="07" section="重點 2　旋鈕會互相牽動" title="把濃度和萃取率控制一樣後，水溫的差別就不明顯了" scope="滴濾、87–93°C｜S05" wiki="時間、水溫與風味" source="S05（含 2021 作者更正）">
+  <Frame page="07" section="重點 2　旋鈕會互相牽動" title="比較水溫之前，先看杯子結果" scope="滴濾、87–93°C｜S05" wiki="時間、水溫與風味" source="S05（含 2021 作者更正）">
     <div style={{ display: 'grid', gridTemplateColumns: '1fr 0.8fr', gap: 48, alignItems: 'center' }}>
       <div>
         <Steps>
@@ -339,13 +348,10 @@ const Temperature: Page = () => (
           <Step><StepLine number="02" label="控制" text="調研磨與時間，讓每杯 TDS／萃取率相同。" /></Step>
           <Step><StepLine number="03" label="結果" text="品評時，水溫本身沒有顯著的感官影響。" /></Step>
         </Steps>
-        <p style={{ margin: '24px 0 0', color: C.muted, fontSize: 26, lineHeight: 1.45 }}>
-          這不代表水溫不重要——水溫會改變萃取，進而改變 TDS／萃取率。
-        </p>
       </div>
       <Photo src={temperatureSetup} alt="滴濾器與分享壺放在電子秤上的手沖配置" credit="Photo by Matthias Oberholzer · Unsplash" href="https://unsplash.com/photos/coffee-is-brewing-in-a-pour-over-setup-SpiXdOg0VP0" style={{ height: 470 }} />
     </div>
-    <Takeaway>比較兩杯咖啡時，先看「杯子結果」（濃度、萃取率），再追究是哪個旋鈕造成的。</Takeaway>
+    <Takeaway>水溫會改變萃取；但濃度和萃取率相同時，87–93°C 的差別喝不太出來。</Takeaway>
   </Frame>
 );
 
@@ -374,10 +380,10 @@ const Methods: Page = () => (
 
 /* ---------- 09 重點 3：調整流程 ---------- */
 const Decision = ({ when, then }: { when: string; then: string }) => (
-  <div style={{ display: 'grid', gridTemplateColumns: '1fr 44px 1.15fr', alignItems: 'center', gap: 12, padding: '18px 0', borderBottom: `1px solid ${C.line}` }}>
-    <span style={{ fontSize: 30, fontWeight: 650 }}>{when}</span>
+  <div style={{ display: 'grid', gridTemplateColumns: '1fr 44px 1.15fr', alignItems: 'center', gap: 12, padding: '26px 0', borderBottom: `1px solid ${C.line}` }}>
+    <span style={{ fontSize: 34, fontWeight: 700 }}>{when}</span>
     <span style={{ color: C.caramel, fontSize: 30 }}>→</span>
-    <span style={{ fontSize: 29, color: C.muted, lineHeight: 1.35 }}>{then}</span>
+    <span style={{ fontSize: 31, color: C.muted, lineHeight: 1.35 }}>{then}</span>
   </div>
 );
 
@@ -385,18 +391,14 @@ const BrewLoop: Page = () => (
   <Frame page="09" section="重點 3　一次只改一項" title="把下一杯，變成一次小實驗" wiki="感官與調整方法、粉水比、研磨與流動" source="S03、S04">
     <div style={{ display: 'grid', gridTemplateColumns: '1.4fr 0.75fr', gap: 46, alignItems: 'center' }}>
       <div>
-        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: 14, marginBottom: 24 }}>
-          {[
-            ['記錄', '豆子、方法、粉量、水量、溫度、時間'],
-            ['描述', '酸、甜、苦、厚薄、餘韻（先寫觀察）'],
-            ['只改一項', '比較前後；意外也要記下來'],
-          ].map(([t, d], i) => (
-            <div key={t} style={{ background: C.card, border: `1px solid ${C.line}`, borderRadius: 20, padding: '20px 22px' }}>
-              <div style={{ color: C.caramel, fontSize: 24, fontWeight: 700 }}>0{i + 1}</div>
-              <div style={{ fontSize: 34, fontWeight: 720, margin: '6px 0 8px' }}>{t}</div>
-              <div style={{ color: C.muted, fontSize: 24, lineHeight: 1.4, textWrap: 'pretty' } as CSSProperties}>{d}</div>
-            </div>
+        <div style={{ display: 'flex', alignItems: 'center', gap: 16, marginBottom: 30, fontSize: 32, fontWeight: 700 }}>
+          {['記錄條件', '描述味道', '只改一項'].map((t, i) => (
+            <span key={t} style={{ display: 'flex', alignItems: 'center', gap: 16 }}>
+              {i > 0 && <span style={{ color: C.caramel }}>→</span>}
+              <span style={{ padding: '12px 22px', background: C.card, border: `1px solid ${C.line}`, borderRadius: 999 }}>{t}</span>
+            </span>
           ))}
+          <span style={{ color: C.caramel }}>↺</span>
         </div>
         <Steps>
           <Step><Decision when="太濃／太淡" then="先調粉水比，並寫清比例方向" /></Step>
@@ -504,13 +506,13 @@ const Appendix: Page = () => (
 export const notes = [
   '開場：今天不背數字，只學會看懂兩個數字、三個旋鈕，和一個調整方法。',
   '先講三件事，後面每一頁左上角都會標示它屬於哪個重點。',
-  '萃取就是水把咖啡粉裡的物質帶進杯子。接觸、溶出、成杯三個階段，各有不同條件在影響。',
-  '最重要的一頁：TDS 和萃取率分子一樣，都是溶解固體；差別只在分母，一個除以杯子，一個除以粉。',
+  '萃取就是水把咖啡粉裡的物質帶進杯子。研磨管接觸，水溫和時間管溶出，最後變成杯子裡的濃度和味道。',
+  '最重要的一頁：TDS 和萃取率分子一樣，都是溶解固體；差別只在分母，一個除以杯子，一個除以粉。用算算看那一列帶大家算一次：3.3 克溶解固體，除以 15 克粉，大約 22%。',
   'S03 的浸泡實驗：水加越多，咖啡越淡，但萃取率幾乎停在 21% 左右。所以想調濃淡，先動比例。注意這是浸泡式、接近平衡的結果。',
   '直覺會覺得磨越細萃越多，但義式研究發現中間設定最高，因為太細時水流不均勻。研磨同時影響接觸面積和水流。',
-  'S05 把每杯的濃度和萃取率控制成一樣後，87 到 93 度的差別就不顯著了。提醒：水溫仍會改變萃取，只是比較時要先看杯子結果。',
+  'S05 先把每杯的濃度和萃取率控制成一樣，再比較 87 到 93 度，結果差別不顯著。水溫仍會改變萃取，所以比較兩杯時要先看杯子結果。',
   '前面每個結論都標了方法，因為浸泡、手沖、義式的水流方式完全不同，同一個旋鈕的效果不能直接搬。',
-  '實作：記錄、描述、只改一項。太濃太淡先調比例；想改萃取程度就調研磨並看流速；意外結果也要留下。',
+  '實作：記錄條件、描述味道、只改一項，然後循環。太濃太淡先調比例；想改萃取程度就調研磨並看流速；意外結果也要留下。',
   '回顧三件事。一句話：先量清楚，再一次調一個旋鈕。',
   '六篇研究與查核範圍。',
   '附錄：每一頁對應的 Wiki 頁與來源 ID，以及 Ingest、Query、Lint、修正到簡報的流程。',
