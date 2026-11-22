@@ -8,7 +8,7 @@
 |---|---|
 | **線上觀看** | [咖啡萃取的科學](https://claude.ai/artifact/CYZs65Fon3WiSuUiqztvZj) |
 | **離線版** | [`教學簡報.html`](教學簡報.html)：下載後雙擊，用瀏覽器開啟（GitHub 頁面不會直接播放 HTML） |
-| **操作** | ← / → 換頁 · F 全螢幕 · N 講稿 |
+| **操作** | ← / → 換頁 · F 全螢幕 |
 | **原始碼** | [`slides/coffee-extraction-science/`](slides/coffee-extraction-science/) |
 
 ## 專案狀態

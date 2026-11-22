@@ -191,3 +191,7 @@
 ## [2026-11-22] slide revision | 重點再收斂
 
 - 第 4 頁加示範計算、第 7 頁標題縮短、第 9 頁精簡、第 3 頁重點句具體化；截圖檢查通過。細節見 `checks/slide-focus-revision.md` 第三輪。
+
+## [2026-11-22] slide revision | 移除講稿
+
+- 依使用者要求移除投影片的 `notes` 講稿匯出，以及單檔 HTML 的「講稿」按鈕與 N 快捷鍵；README 操作說明同步更新。重新建置後逐頁截圖，無 console 錯誤。
